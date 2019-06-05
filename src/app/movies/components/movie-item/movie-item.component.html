@@ -1,53 +1,54 @@
-<mat-card class="movie-item">
+<mat-card class="movie-item" *ngFor="let movie of movies">
   <mat-card-header>
     <mat-card-title>
-      {{title}} <span class="movie-year">({{year}})</span>
+      {{movie.title}} <span class="movie-year">({{movie.year}})</span>
     </mat-card-title>
     <mat-card-subtitle>
-      {{genre}}
+      {{movie.genre}}
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row" class="details">
       <div fxFlex="30">
-        <img src="{{poster}}">
+        <img [src]="movie.poster">
       </div>
       <div fxFlex="70">
-        {{plot}}
+        {{movie.plot}}
       </div>
     </div>
   </mat-card-content>
   <div>
-    <div [hidden]="commentSaved">
+    <div *ngIf="!movie.commentSaved; else commentStatic">
       <mat-form-field class="comments">
         <textarea
-          [(ngModel)]="movieComment"
+          [(ngModel)]="movie.comment"
           placeholder="Comment"
           matInput
           matTextareaAutosize
           matAutosizeMinRows="1"
           matAutosizeMaxRows="4"
+          #comment
         ></textarea>
       </mat-form-field>
-      <div [ngStyle]="{color: movieComment.trim().length === 0 ? 'firebrick' : 'lightseagreen'}">
-        {{wordCount()}} words
+      <div [ngStyle]="{color: movie.comment.trim().length === 0 ? 'firebrick' : 'lightseagreen'}">
+        {{wordCount(comment.value)}} words
       </div>
     </div>
-    <div [hidden]="!commentSaved">
+    <ng-template #commentStatic>
       <p>
         Comment:
       </p>
       <p class="comment">
-        {{movieComment}}
+        {{movie.comment}}
       </p>
-    </div>
+    </ng-template>
     <mat-card-actions>
       <button
         mat-raised-button
-        [disabled]="movieComment.trim().length === 0"
-        (click)="saveComment()"
+        [disabled]="movie.comment.trim().length === 0"
+        (click)="saveComment(movie.id)"
       >
-        {{commentSaved ? 'Edit' : 'Save'}} comment
+        {{movie.commentSaved ? 'Edit' : 'Save'}} comment
       </button>
     </mat-card-actions>
   </div>
