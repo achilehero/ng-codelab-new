@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Observable, fromEvent } from 'rxjs';
+import { debounceTime, map, switchMap } from 'rxjs/operators';
 import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../model/movie';
 
@@ -8,12 +10,21 @@ import { Movie } from '../../model/movie';
   styleUrls: ['./movie-list.component.scss']
 })
 export class MovieListComponent implements OnInit {
-  movies: Movie[];
+  movies$: Observable<Movie[]>;
+  @ViewChild('searchField', {static: true}) searchField;
+
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-    this.movieService.getMovies().subscribe((data) => {
-      this.movies = data;
+    this.movies$ = this.movieService.getMovies();
+    this.movieService.loadAll();
+    fromEvent(this.searchField.nativeElement, 'input')
+      .pipe(
+        debounceTime(300),
+        map((event: any) => event.target.value),
+      )
+    .subscribe(searchTerm => {
+      this.movieService.searchMovie(searchTerm);
     });
   }
 

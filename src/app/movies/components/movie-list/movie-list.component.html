@@ -1,6 +1,19 @@
-<ngi-movie-item
-  *ngFor="let movie of movies"
-  [movie]="movie"
-  (commentUpdate)="handleCommentUpdate($event)"
-  (movieDelete)="handleMovieDelete($event)"
-></ngi-movie-item>
+<div class="search">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Search books" #searchField>
+  </mat-form-field>
+</div>
+<ng-container *ngIf="(movies$ | async) as movies">
+  <div *ngIf="movies.length; else empty">
+    <ngi-movie-item
+      *ngFor="let movie of movies"
+      [movie]="movie"
+      (commentUpdate)="handleCommentUpdate($event)"
+      (movieDelete)="handleMovieDelete($event)"
+    ></ngi-movie-item>
+  </div>
+  <ng-template #empty>
+    No movies found
+  </ng-template>
+</ng-container>
+
