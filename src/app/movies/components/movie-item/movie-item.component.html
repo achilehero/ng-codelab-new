@@ -54,6 +54,13 @@
       >
         {{commentSaved ? 'Edit' : 'Save'}} comment
       </button>
+      <button
+        mat-raised-button
+        (click)="handleDelete()"
+        color="accent"
+      >
+        Delete movie
+      </button>
     </mat-card-actions>
   </div>
 </mat-card>

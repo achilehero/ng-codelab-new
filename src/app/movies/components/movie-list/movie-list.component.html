@@ -2,4 +2,5 @@
   *ngFor="let movie of movies"
   [movie]="movie"
   (commentUpdate)="handleCommentUpdate($event)"
+  (movieDelete)="handleMovieDelete($event)"
 ></ngi-movie-item>
