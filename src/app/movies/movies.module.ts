@@ -9,6 +9,7 @@ import { MovieItemComponent } from './components/movie-item/movie-item.component
 import { MovieListComponent } from '../movies/components/movie-list/movie-list.component';
 import { RatingComponent } from '../movies/components/rating/rating.component';
 import { MovieImageFallbackDirective } from '../movies/directives/movie-image-fallback.directive';
+import { WordCountPipe } from './pipes/word-count.pipe';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { MovieImageFallbackDirective } from '../movies/directives/movie-image-fa
     MaterialModule,
     FlexLayoutModule
   ],
-  declarations: [MovieItemComponent, MovieListComponent, RatingComponent, MovieImageFallbackDirective],
+  declarations: [MovieItemComponent, MovieListComponent, RatingComponent, MovieImageFallbackDirective, WordCountPipe],
   exports: [MovieListComponent]
 })
 export class MoviesModule {}

@@ -27,15 +27,4 @@ export class MovieItemComponent implements OnInit {
     }
     this.commentSaved = !this.commentSaved;
   }
-
-  wordCount(comment) {
-    if (!comment || comment.length === 0) {
-      return 0;
-    } else {
-      return comment
-        .trim()
-        .replace(/  +/g, ' ')
-        .split(' ').length;
-    }
-  }
 }
