@@ -33,7 +33,7 @@ export class MovieListComponent implements OnInit {
       year: 1999,
       genre: 'Drama',
       plot: 'An insomniac office worker, looking for a way to change his life, crosses paths with a devil-may-care soapmaker, forming an underground fight club that evolves into something much, much more.',
-      poster: 'https://images-na.ssl-images-amazon.com/images/I/51v5ZpFyaFL.jpg',
+      poster: 'https://imasges-na.ssl-images-amazon.com/images/I/51v5ZpFyaFL.jpg',
       comment: '',
       commentSaved: false
     },

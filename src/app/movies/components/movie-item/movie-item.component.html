@@ -10,7 +10,7 @@
   <mat-card-content>
     <div fxLayout="row" class="details">
       <div fxFlex="30">
-        <img [src]="movie.poster">
+        <img [src]="movie.poster" ngiMovieImageFallback>
       </div>
       <div fxFlex="70">
         {{movie.plot}}

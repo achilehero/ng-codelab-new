@@ -8,6 +8,7 @@ import { MaterialModule } from '../material.module';
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
 import { MovieListComponent } from '../movies/components/movie-list/movie-list.component';
 import { RatingComponent } from '../movies/components/rating/rating.component';
+import { MovieImageFallbackDirective } from '../movies/directives/movie-image-fallback.directive';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { RatingComponent } from '../movies/components/rating/rating.component';
     MaterialModule,
     FlexLayoutModule
   ],
-  declarations: [MovieItemComponent, MovieListComponent, RatingComponent],
+  declarations: [MovieItemComponent, MovieListComponent, RatingComponent, MovieImageFallbackDirective],
   exports: [MovieListComponent]
 })
 export class MoviesModule {}
