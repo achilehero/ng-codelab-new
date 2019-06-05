@@ -1,4 +1,4 @@
-<mat-card class="movie-item" *ngFor="let movie of movies">
+<mat-card class="movie-item">
   <mat-card-header>
     <mat-card-title>
       {{movie.title}} <span class="movie-year">({{movie.year}})</span>
@@ -18,10 +18,10 @@
     </div>
   </mat-card-content>
   <div>
-    <div *ngIf="!movie.commentSaved; else commentStatic">
+    <div *ngIf="!commentSaved; else commentStatic">
       <mat-form-field class="comments">
         <textarea
-          [(ngModel)]="movie.comment"
+          [(ngModel)]="movieComment"
           placeholder="Comment"
           matInput
           matTextareaAutosize
@@ -30,25 +30,29 @@
           #comment
         ></textarea>
       </mat-form-field>
-      <div [ngStyle]="{color: movie.comment.trim().length === 0 ? 'firebrick' : 'lightseagreen'}">
+      <div [ngStyle]="{color: movieComment.trim().length === 0 ? 'firebrick' : 'lightseagreen'}">
         {{wordCount(comment.value)}} words
       </div>
+    </div>
+    <div>
+      <p><b>Rating:</b></p>
+      <ngi-rating [(rating)]="movieRating"></ngi-rating>
     </div>
     <ng-template #commentStatic>
       <p>
         Comment:
       </p>
       <p class="comment">
-        {{movie.comment}}
+        {{movieComment}}
       </p>
     </ng-template>
     <mat-card-actions>
       <button
         mat-raised-button
-        [disabled]="movie.comment.trim().length === 0"
-        (click)="saveComment(movie.id)"
+        [disabled]="movieComment.trim().length === 0"
+        (click)="saveComment()"
       >
-        {{movie.commentSaved ? 'Edit' : 'Save'}} comment
+        {{commentSaved ? 'Edit' : 'Save'}} comment
       </button>
     </mat-card-actions>
   </div>

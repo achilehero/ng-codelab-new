@@ -1,0 +1,5 @@
+<mat-icon
+  *ngFor="let state of starStates; let i = index"
+  [ngClass]="{'filled-star': state}"
+  (click)="handleRatingClick(i+1)"
+>star</mat-icon>

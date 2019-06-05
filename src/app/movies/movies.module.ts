@@ -6,6 +6,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material.module';
 
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
+import { MovieListComponent } from '../movies/components/movie-list/movie-list.component';
+import { RatingComponent } from '../movies/components/rating/rating.component';
 
 @NgModule({
   imports: [
@@ -14,7 +16,7 @@ import { MovieItemComponent } from './components/movie-item/movie-item.component
     MaterialModule,
     FlexLayoutModule
   ],
-  declarations: [MovieItemComponent],
-  exports: [MovieItemComponent]
+  declarations: [MovieItemComponent, MovieListComponent, RatingComponent],
+  exports: [MovieListComponent]
 })
 export class MoviesModule {}
