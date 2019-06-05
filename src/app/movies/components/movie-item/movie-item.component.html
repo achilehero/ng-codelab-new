@@ -1,20 +1,54 @@
 <mat-card class="movie-item">
-    <mat-card-header>
-      <mat-card-title>
-        {{title}} <span class="movie-year">({{year}})</span>
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{genre}}
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div fxLayout="row" class="details">
-        <div fxFlex="30">
-          <img src="{{poster}}">
-        </div>
-        <div fxFlex="70">
-          {{plot}}
-        </div>
+  <mat-card-header>
+    <mat-card-title>
+      {{title}} <span class="movie-year">({{year}})</span>
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{genre}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row" class="details">
+      <div fxFlex="30">
+        <img src="{{poster}}">
       </div>
-    </mat-card-content>
-  </mat-card>
+      <div fxFlex="70">
+        {{plot}}
+      </div>
+    </div>
+  </mat-card-content>
+  <div>
+    <div [hidden]="commentSaved">
+      <mat-form-field class="comments">
+        <textarea
+          [(ngModel)]="movieComment"
+          placeholder="Comment"
+          matInput
+          matTextareaAutosize
+          matAutosizeMinRows="1"
+          matAutosizeMaxRows="4"
+        ></textarea>
+      </mat-form-field>
+      <div [ngStyle]="{color: movieComment.trim().length === 0 ? 'firebrick' : 'lightseagreen'}">
+        {{wordCount()}} words
+      </div>
+    </div>
+    <div [hidden]="!commentSaved">
+      <p>
+        Comment:
+      </p>
+      <p class="comment">
+        {{movieComment}}
+      </p>
+    </div>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        [disabled]="movieComment.trim().length === 0"
+        (click)="saveComment()"
+      >
+        {{commentSaved ? 'Edit' : 'Save'}} comment
+      </button>
+    </mat-card-actions>
+  </div>
+</mat-card>
