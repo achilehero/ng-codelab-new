@@ -1,17 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from './material.module';
-import { MoviesModule } from './movies/movies.module';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +21,13 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     MaterialModule,
     FlexLayoutModule,
-    MoviesModule
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      {
+        path: 'movies',
+        loadChildren: './movies/movies.module#MoviesModule',
+      }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
