@@ -1,3 +1,39 @@
-<a [routerLink]="['/movies']" mat-raised-button>back</a>
-<br>
-Selected movieID: {{movieId}}
+<div class="movie-form" fxLayout="column" *ngIf="movieModel">
+  <mat-card >
+    <form novalidate #movieForm="ngForm" (ngSubmit)="onSubmit()">
+      <mat-card-title>
+        Movie Form
+      </mat-card-title>
+      <mat-card-content fxLayout="row">
+        <div fxFlex="70">
+          <mat-form-field>
+            <input matInput name="title" placeholder="Title" required [(ngModel)]="movieModel.title" #title="ngModel">
+            <mat-error *ngIf="title.invalid">Title required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput name="genre" placeholder="Genre" required [(ngModel)]="movieModel.genre" #genre="ngModel">
+            <mat-error *ngIf="genre.invalid">Genre required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput name="year" placeholder="Year" required [(ngModel)]="movieModel.year" #year="ngModel">
+            <mat-error *ngIf="year.invalid">Year required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <textarea matInput name="plot" placeholder="Plot" required [(ngModel)]="movieModel.plot" #plot="ngModel"></textarea>
+            <mat-error *ngIf="plot.invalid">Year required</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput name="poster" placeholder="Poster" [(ngModel)]="movieModel.poster">
+          </mat-form-field>
+        </div>
+        <div class="previewImage" fxFlex="30" style="text-align: center;">
+          <img [src]="movieModel.poster" ngiMovieImageFallback="assets/noImage2.png">
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="submit" color="primary" [disabled]="movieForm.invalid">Save</button>
+        <a mat-raised-button [routerLink]="['../']">Cancel</a>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
